@@ -1,0 +1,102 @@
+<app-corporate-question-set [CurrentTestId]="CurrentTestId"></app-corporate-question-set>
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-body">
+                <span *ngFor="let Q of Question.lstQuestionIdStatus;let j=index;">
+                    <div *ngIf="Q.Status === 'C';then CompleteQues else NoCompleteQues"></div>
+                    <ng-template #NoCompleteQues>
+                        <button type="button" class="btn btn-danger btn-circle btn-lg" (click)="QuestionOpen(Q.QuestionId)"> {{j +1}}
+                        </button>
+                    </ng-template>
+                    <ng-template #CompleteQues>
+                        <button type="button" class="btn btn-success btn-circle btn-lg" (click)="QuestionOpen(Q.QuestionId)">{{j +1}}
+                        </button>
+                    </ng-template>
+                </span>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-header">
+                <div class="card-head-row">
+                    <div class="card-title" style="display: none;">{{Question.CurrentSetName}}</div>
+                    <div class="card-tools" style="font-size: 16px;">
+                        <b>Question {{Question.CompletedQuestion}} of {{Question.TotalQuestion}} | Timer : {{message}} </b>
+                    </div>
+                </div>
+            </div>
+            <div class="card-body">
+                <form #QuestionForm='ngForm'>
+                    <div *ngFor="let Q of Question.lstQuestionModel;let j=index;">
+                        <div class="form-group" [class.has-error]="Q.QuesId.invalid && Q.QuesId.touched">
+
+                            <h5 class="card-title" appBlockCopyPaste [innerHTML]="Q.Question"><b>Question : </b>
+                                {{Q.Question}}</h5>
+                            <br />
+
+                            <div class="radiobtn" *ngFor="let QuesRes of Q.lstQuestionRes">
+
+                                <input required type="radio" [name]="Q.QuesId" #{{Q.QuesId}}="ngModel"
+                                    [(ngModel)]="Q.ResponseValue" [value]="QuesRes.ResponseId"
+                                    [id]="QuesRes.ResponseId" />
+                                <label [for]="QuesRes.ResponseId" appBlockCopyPaste>
+                                    {{QuesRes.ResponseText}}
+                                </label>
+                            </div>
+
+                        </div>
+                    </div>
+
+
+                </form>
+
+
+            </div>
+
+            <div class="card-footer">
+                <div *ngIf="QuestionForm.invalid;then FormValidation else loading_content"></div>
+                <ng-template #FormValidation>
+                    <button mat-button [hidden]="!Question.IsShowNextButton" (click)="NextAndSaveQuestion()"
+                        type="button" style="cursor: pointer;float: right" 
+                        class="mat-raised-button mat-primary" [class.spinner]="loading">
+                        Next Question
+                    </button>
+                    <button mat-button [hidden]="!Question.IsShowPrevButton" (click)="PrevAndSaveQuestion()"
+                        type="button" style="cursor: pointer;float: left" 
+                        class="mat-raised-button mat-primary" [class.spinner]="loading">
+                        Previous Question
+                    </button>
+                    <button mat-button [hidden]="!Question.IsShowSubmitButton" (click)="saveQuestion()" type="submit"
+                        style="cursor: pointer;float: right" 
+                        class="mat-raised-button mat-primary" [class.spinner]="loading">
+                        Submit Set
+                    </button>
+                </ng-template>
+                <ng-template #loading_content>
+                    <button mat-button [hidden]="!Question.IsShowNextButton" (click)="NextAndSaveQuestion()"
+                        type="button" style="cursor: pointer;float: right" [disabled]="loading"
+                        class="mat-raised-button mat-primary" [class.spinner]="loading">
+                        Next Question
+                    </button>
+                    <button mat-button [hidden]="!Question.IsShowPrevButton" (click)="PrevAndSaveQuestion()"
+                        type="button" style="cursor: pointer;float: left" [disabled]="loading"
+                        class="mat-raised-button mat-primary" [class.spinner]="loading">
+                        Previous Question
+                    </button>
+                    <button mat-button [hidden]="!Question.IsShowSubmitButton" (click)="saveQuestion()" type="submit"
+                        style="cursor: pointer;float: right" [disabled]="loading" class="mat-raised-button mat-primary"
+                        [class.spinner]="loading">
+                        Submit Set
+                    </button>
+                </ng-template>
+
+            </div>
+        </div>
+    </div>
+</div>

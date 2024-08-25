@@ -1,0 +1,21 @@
+<h1 mat-dialog-title> Enter OTP     <mat-error *ngIf="Error">{{Error}}</mat-error></h1>
+<div mat-dialog-content>
+  <ng-otp-input #ngOtpInput (onInputChange)="onOtpChange($event)" 
+        [config]="config"></ng-otp-input>
+</div>
+<br/>
+<div mat-dialog-content>
+  <b>Note : </b> An OTP has been sent to your registered email ID and mobile number.<br/> The same shall remain valid for 10 minutes.
+</div>
+
+  <div mat-dialog-actions>
+    <button type="button" class="btn btn-primary btn-sm" [hidden]="IsResendBtn" [disabled]="IsSubmitbtn" (click)="Submit()">Verify OTP</button>
+    <button type="button" class="btn btn-primary btn-sm" [hidden]="!IsResendBtn" (click)="Resend()">Resend OTP</button>
+   <!-- <button mat-button [hidden]="IsResendBtn" [disabled]="IsSubmitbtn"  color="primary"  (click)="Submit()">Submit</button>-->
+    <!--<button mat-button  [hidden]="!IsResendBtn" color="primary" (click)="Resend()">Resend</button>-->
+    <!--<button mat-button mat-dialog-close color="primary">Close</button>-->
+
+  </div>
+
+
+  

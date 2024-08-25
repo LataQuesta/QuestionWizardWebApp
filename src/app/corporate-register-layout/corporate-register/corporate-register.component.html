@@ -1,0 +1,443 @@
+<div *ngIf="MessageLog">
+    <div class="alert alert-danger">
+        {{MessageLog}}
+    </div>
+
+    <br />
+</div>
+
+
+
+
+
+
+<ng-template matStepperIcon="done">
+    <mat-icon role="img" class="mat-icon notranslate material-icons mat-icon-no-color ng-star-inserted"
+        aria-hidden="true">done</mat-icon>
+</ng-template>
+<ng-template matStepperIcon="create">
+    <mat-icon role="img" class="mat-icon notranslate material-icons mat-icon-no-color ng-star-inserted"
+        aria-hidden="true">create</mat-icon>
+</ng-template>
+<ng-template matStepperIcon="last">
+    <mat-icon>done_all</mat-icon>
+</ng-template>
+
+<!-- 2 columns -->
+<div class="row">
+
+    <div class="col-xs-12 col-sm-4">
+        <mat-card style="max-width: 478px;">
+
+            <mat-card-content>
+
+                <h1>
+                    <b>Welcome to Questa Enneagram Assessment <br>Framework</b>
+                </h1>
+                <br />
+                <span>
+                    This assessment is a part of Questa Talent Solutions and includes sections that assess you on your
+                    personality and competencies.
+                </span>
+
+
+            </mat-card-content>
+        </mat-card>
+    </div>
+    <div class="col-xs-12 col-sm-1">
+&nbsp;
+    </div>
+    <div class="col-xs-12 col-sm-7">
+
+        <mat-card>
+            <mat-card-content>
+                <mat-horizontal-stepper #stepper>
+                    <mat-step [stepControl]="CandidateFirstStage" state="done">
+                        <form [formGroup]="CandidateFirstStage">
+                            <div class="form-row">
+                                <div class="form-group col-md-12">
+                                    <mat-form-field class="example-full-width" appearance="outline"
+                                    [ngClass]="{ 'is-invalid': submitted && f1.FirstName.errors }">
+                                        <mat-label>First Name</mat-label>
+                                        <input matInput placeholder="First Name" formControlName="FirstName"
+                                            [(ngModel)]="CorporateModel.FirstName">
+
+
+                                        <mat-error *ngIf="f1.FirstName.errors !== null && f1.FirstName.errors.required">
+                                            First Name is required
+                                        </mat-error>
+
+                                    </mat-form-field>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group col-md-12">
+                                    <mat-form-field class="example-full-width" appearance="outline"
+                                    [ngClass]="{ 'is-invalid': submitted && f1.MiddelName.errors }">
+                                        <mat-label>Middle Name </mat-label>
+                                        <input matInput placeholder="Middle Name" formControlName="MiddelName"
+                                            [(ngModel)]="CorporateModel.MiddleName">
+
+                                     
+                                    </mat-form-field>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group col-md-12">
+                                    <mat-form-field class="example-full-width" appearance="outline"
+                                    [ngClass]="{ 'is-invalid': submitted && f1.LastName.errors }">
+                                        <mat-label>Last Name</mat-label>
+                                        <input matInput placeholder="Last Name" formControlName="LastName"
+                                            [(ngModel)]="CorporateModel.LastName">
+
+
+                                        <mat-error *ngIf="f1.LastName.errors !== null && f1.LastName.errors.required">
+                                            Last Name is required
+                                        </mat-error>
+                                    </mat-form-field>
+                                </div>
+                            </div>
+                                
+
+                            <div class="form-row">
+                                <div class="form-group col-md-6">
+                                    <mat-form-field class="example-full-width" appearance="outline"
+                                        [ngClass]="{ 'is-invalid': submitted && f1.Gender.errors }">
+                                        <mat-label>Gender</mat-label>
+                                        <mat-select placeholder="Gender" required formControlName="Gender"
+                                            [(ngModel)]="CorporateModel.UserGender"
+                                            (selectionChange)="onChangeGender(CorporateModel.UserGender)">
+                                            <mat-option>Select Gender</mat-option>
+                                            <mat-option *ngFor="let gender of Gender" [value]="gender.GenderId">
+                                                {{gender.GenderName}}
+                                            </mat-option>
+                                        </mat-select>
+
+                                        <mat-error *ngIf="f1.Gender.errors !== null && f1.Gender.errors.required">
+                                            Please select gender
+                                        </mat-error>
+                                    </mat-form-field>
+                                </div>
+                                <div class="form-group col-md-6" [hidden]="CorporateModel.UserGender==3?false:true">
+                                    <mat-form-field class="example-full-width" appearance="outline">
+                                        <mat-label>Other Gender</mat-label>
+                                        <input matInput required placeholder="Other Gender" formControlName="GenderTxt"
+                                            [(ngModel)]="CorporateModel.GenderTxt">
+                                        <mat-error
+                                            *ngIf="f1.GenderTxt.errors !== null && f1.GenderTxt.errors.validGendertxt">
+                                            Please enter other gender
+                                        </mat-error>
+                                    </mat-form-field>
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <mat-form-field class="example-full-width" appearance="outline">
+                                        <mat-label>Date of Birth</mat-label>
+                                        <input matInput required [matDatepicker]="picker1"
+                                            placeholder="Choose Date of Birth" formControlName="DateOfBirth"
+                                            [(ngModel)]="CorporateModel.DateOfBirth">
+                                        <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+                                        <mat-datepicker #picker1></mat-datepicker>
+                                        
+                                        <mat-error *ngIf="f1.DateOfBirth.errors !== null && f1.DateOfBirth.errors.InvalidAgeCount">
+                                            age greater than 17
+                                         </mat-error>
+                                    </mat-form-field>
+                                </div>
+
+                            </div>
+
+                            <div class="form-row">
+                                <div class="form-group col-md-4" style="margin: 0 auto;float: none;">
+                                    <div *ngIf="CandidateFirstStage.invalid;then FormValidation else loading_content">
+                                    </div>
+                                    <ng-template #FormValidation>
+                                        <div class="form-group col-md-12">
+                                            <button matStepperNext mat-button type="submit"
+                                                class="mat-raised-button mat-primary" [class.spinner]="loading"
+                                                [disabled]="CandidateFirstStage.invalid"
+                                                style="float: right;width: 100%;">Next</button>
+                                        </div>
+                                    </ng-template>
+                                    <ng-template #loading_content>
+                                        <div class="form-group col-md-12">
+                                            <button matStepperNext mat-button type="submit"
+                                                class="mat-raised-button mat-primary" [class.spinner]="loading"
+                                                [disabled]="loading" style="float: right; width: 100%;">Next</button>
+                                        </div>
+                                    </ng-template>
+                                </div>
+
+                            </div>
+
+
+                        </form>
+                    </mat-step>
+
+                    <mat-step [stepControl]="CandidateSecondStage" state="done">
+                        <form [formGroup]="CandidateSecondStage">
+                            <div class="form-row">
+                                <div class="form-group col-md-12">
+                                    <mat-form-field class="example-full-width" appearance="outline">
+                                        <mat-label>Email</mat-label>
+                                        <input matInput placeholder="Email" formControlName="Email"
+                                            [(ngModel)]="CorporateModel.UserEmail">
+
+
+                                        <mat-error *ngIf="f2.Email.errors !== null && f2.Email.errors.required">
+                                            Email is required
+                                        </mat-error>
+                                        <mat-error *ngIf="f2.Email.errors !== null && f2.Email.errors.email">
+                                           Please enter valid email id
+                                        </mat-error>
+
+                                    </mat-form-field>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group col-md-12">
+                                    <mat-form-field class="example-full-width" appearance="outline">
+                                        <mat-label>Phone Number</mat-label>
+                                        <input matInput placeholder="Phone Number" formControlName="Phone"
+                                            [(ngModel)]="CorporateModel.PhoneNumber">
+
+                                        <mat-error *ngIf="f2.Phone.errors !== null && f2.Phone.errors.required">
+                                            Phone Number is required
+                                        </mat-error>
+                                        <mat-error *ngIf="f2.Phone.errors !== null && f2.Phone.errors.pattern">
+                                            Please enter minmum 10 digit 
+                                        </mat-error>
+
+                                    </mat-form-field>
+                                </div>
+                            </div>
+
+                            <div class="form-row">
+                                <div class="form-group col-md-6">
+                                    <mat-form-field class="example-full-width" appearance="outline"
+                                        [ngClass]="{ 'is-invalid': submitted && f2.Country.errors }">
+                                        <mat-label>Country</mat-label>
+                                        <mat-select placeholder="Country" required formControlName="Country"
+                                            (selectionChange)="onChangeCountry(CorporateModel.Country)"
+                                            [(ngModel)]="CorporateModel.Country">
+                                            <mat-option>Select Country</mat-option>
+                                            <mat-option *ngFor="let Co of countries" [value]="Co.countryId">
+                                                {{Co.countryname}}
+                                            </mat-option>
+                                        </mat-select>
+                                        <mat-error *ngIf="f2.Country.errors !== null && f2.Country.errors.required">
+                                            Please select country
+                                        </mat-error>
+                                    </mat-form-field>
+                                </div>
+                                <div class="form-group col-md-6" [hidden]="CorporateModel.Country==1?false:true">
+                                    <mat-form-field class="example-full-width" appearance="outline"
+                                        [ngClass]="{ 'is-invalid': submitted && f2.State.errors }">
+                                        <mat-label>State</mat-label>
+                                        <mat-select placeholder="State" required formControlName="State"
+                                            [(ngModel)]="CorporateModel.State">
+                                            <mat-option>Select State</mat-option>
+                                            <mat-option *ngFor="let state of states" [value]="state.stateId">
+                                                {{state.statename}}
+                                            </mat-option>
+                                        </mat-select>
+                                        <mat-error *ngIf="f2.State.errors !== null && f2.State.errors.validstate">
+                                            Please select State
+                                        </mat-error>
+                                    </mat-form-field>
+                                </div>
+                            </div>
+
+                            <div class="form-row">
+                                <div class="form-group col-md-6">
+                                    <button mat-button matStepperPrevious class="mat-raised-button mat-primary" style="width: 100%;">
+                                        Back
+                                    </button>
+                                </div>
+                                <div class="form-group col-md-6">
+
+                                    <div *ngIf="CandidateSecondStage.invalid;then FormValidation1 else loading_content1">
+                                    </div>
+                                    <ng-template #FormValidation1>
+                                        <div class="form-group col-md-12">
+                                            <button matStepperNext mat-button type="submit"
+                                                class="mat-raised-button mat-primary" [class.spinner]="loading"
+                                                [disabled]="CandidateSecondStage.invalid" style="width: 100%;">Next</button>
+                                        </div>
+                                    </ng-template>
+                                    <ng-template #loading_content1>
+                                        <div class="form-group col-md-12">
+                                            <button matStepperNext mat-button type="submit"
+                                                class="mat-raised-button mat-primary" [class.spinner]="loading"
+                                                [disabled]="loading" style="width: 100%;">Next</button>
+                                        </div>
+                                    </ng-template>
+                                </div>
+
+                            </div>
+
+
+                        </form>
+                    </mat-step>
+
+                    <mat-step [stepControl]="CandidateThirdStage" state="done">
+                        <form [formGroup]="CandidateThirdStage">
+                            <div class="form-row">
+                                <div class="form-group col-md-6">
+                                    <mat-form-field class="example-full-width" appearance="outline"
+                                        [ngClass]="{ 'is-invalid': submitted && f3.Qualification.errors }">
+                                        <mat-label>Qualification</mat-label>
+                                        <mat-select placeholder="Qualification" required formControlName="Qualification"
+                                            [(ngModel)]="CorporateModel.Qualification">
+                                            <mat-option>Select Qualification</mat-option>
+                                            <mat-option *ngFor="let qualification of Qualification"
+                                                [value]="qualification.QualificationId">
+                                                {{qualification.QualificationName}}
+                                            </mat-option>
+                                        </mat-select>
+                                        <mat-error
+                                            *ngIf="f3.Qualification.errors !== null && f3.Qualification.errors.required">
+                                            Please select qualification
+                                        </mat-error>
+                                    </mat-form-field>
+                                </div>
+                                <div class="form-group col-md-6" [hidden]="CorporateModel.Qualification==8?false:true">
+                                    <mat-form-field class="example-full-width" appearance="outline">
+                                        <mat-label>Other Qualification</mat-label>
+                                        <input matInput required placeholder="Other Qualification"
+                                            formControlName="QualificationTxt"
+                                            [(ngModel)]="CorporateModel.QualificationTxt">
+                                        <mat-error
+                                            *ngIf="f3.QualificationTxt.errors !== null && f3.QualificationTxt.errors.validQualificationtxt">
+                                            Please enter other qualification
+                                        </mat-error>
+                                    </mat-form-field>
+                                </div>
+                            </div>
+
+                            <div class="form-row">
+                                <div class="form-group col-md-12">
+                                    <mat-form-field class="example-full-width" appearance="outline"
+                                        [ngClass]="{ 'is-invalid': submitted && f3.Industry.errors }">
+                                        <mat-select (openedChange)="openedChange($event)" placeholder="Current Industry"
+                                            required formControlName="Industry" [(ngModel)]="CorporateModel.Industry"
+                                            multiple>
+                                            <mat-select-trigger>
+                                                {{GetFirstpostionValue(this.CandidateThirdStage.get('Industry').value)}}
+                                                <span
+                                                    *ngIf="GetLengthIndustry(this.CandidateThirdStage.get('Industry').value)"
+                                                    class="additional-selection">
+                                                    (+{{CountIndustryValue(this.CandidateThirdStage.get('Industry').value)}})
+                                                </span>
+                                            </mat-select-trigger>
+                                            <div class="select-container">
+                                                <mat-optgroup>
+                                                    <mat-form-field style="width:100%;">
+                                                        <input #search autocomplete="off" placeholder="Search"
+                                                            aria-label="Search" matInput
+                                                            [formControl]="searchTextboxControl">
+                                                        <button [disableRipple]="true" *ngIf="search.value" matSuffix
+                                                            mat-icon-button aria-label="Clear"
+                                                            (click)="clearSearch($event)">
+                                                            <mat-icon>close</mat-icon>
+                                                        </button>
+                                                    </mat-form-field>
+                                                </mat-optgroup>
+                                                <mat-optgroup *ngIf="FilterIndustryCount(filteredOptions | async)">
+                                                    <div>No results found!</div>
+                                                </mat-optgroup>
+                                                <mat-option (onSelectionChange)="selectionChange($event)"
+                                                    *ngFor="let Industry  of filteredOptions | async"
+                                                    [value]="Industry ">
+                                                    {{Industry}}
+                                                </mat-option>
+                                            </div>
+                                        </mat-select>
+                                        <mat-error *ngIf="f3.Industry.errors !== null && f3.Industry.errors.required">
+                                            Please select Industry
+                                        </mat-error>
+                                    </mat-form-field>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group col-md-12">
+                                    <mat-form-field class="example-full-width" appearance="outline"
+                                        [ngClass]="{ 'is-invalid': submitted && f3.EmployeeStatus.errors }">
+                                        <mat-label>Employee Status</mat-label>
+                                        <mat-select placeholder="Employee Status" required
+                                            formControlName="EmployeeStatus"
+                                            [(ngModel)]="CorporateModel.EmployeeStatus">
+                                            <mat-option>Select Employee Status</mat-option>
+                                            <mat-option *ngFor="let employeeStatus of EmployeeStatus"
+                                                [value]="employeeStatus.EmploymentId">
+                                                {{employeeStatus.EmploymentName}}
+                                            </mat-option>
+                                        </mat-select>
+                                        <mat-error
+                                            *ngIf="f3.EmployeeStatus.errors !== null && f3.EmployeeStatus.errors.required">
+                                            Please select employee status
+                                        </mat-error>
+                                    </mat-form-field>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group col-md-12">
+                                    <mat-form-field class="example-full-width" appearance="outline"
+                                        [ngClass]="{ 'is-invalid': submitted && f3.Experience.errors }">
+                                        <mat-label>Experience</mat-label>
+                                        <mat-select placeholder="Experience" required formControlName="Experience"
+                                            [(ngModel)]="CorporateModel.Experience">
+                                            <mat-option>Select Experience</mat-option>
+                                            <mat-option *ngFor="let exp of experience" [value]="exp.ExperenceId">
+                                                {{exp.ExperenceName}}
+                                            </mat-option>
+                                        </mat-select>
+
+                                        <mat-error *ngIf="f3.Experience.errors !== null && f3.Experience.errors.required">
+                                            Please select your experience
+                                        </mat-error>
+                                    </mat-form-field>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group col-md-6">
+                                    <button mat-button matStepperPrevious class="mat-raised-button mat-primary" style="width: 100%;">
+                                        Back
+                                    </button>
+                                </div>
+                                <div class="form-group col-md-6">
+
+                                    <div *ngIf="CandidateThirdStage.invalid;then FormValidation2 else loading_content2">
+                                    </div>
+                                    <ng-template #FormValidation2>
+                                        <div class="form-group col-md-12">
+                                            <button  mat-button type="submit"
+                                                class="mat-raised-button mat-primary" [class.spinner]="loading"
+                                                [disabled]="CandidateThirdStage.invalid" style="width: 100%;" 
+                                                (click)="OnSubmitCorporateDetails()">Start Assessment</button>
+                                        </div>
+                                    </ng-template>
+                                    <ng-template #loading_content2>
+                                        <div class="form-group col-md-12">
+                                            <button  mat-button type="submit"
+                                                class="mat-raised-button mat-primary" [class.spinner]="loading"
+                                                [disabled]="loading" style="width: 100%;" 
+                                                (click)="OnSubmitCorporateDetails()">Start Assessment</button>
+                                        </div>
+                                    </ng-template>
+                                </div>
+
+                            </div>
+
+
+                        </form>
+                    </mat-step>
+
+                </mat-horizontal-stepper>
+
+            </mat-card-content>
+        </mat-card>
+
+
+    </div>
+
+</div>

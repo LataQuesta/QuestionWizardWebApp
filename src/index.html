@@ -1,0 +1,82 @@
+<!doctype html>
+<html class="no-js" lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <title>Questa Enneagram Assessment</title>
+  <base href="/">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" type="image/x-icon" href="favicon.ico">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+    crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,900" rel="stylesheet">
+  <link rel="stylesheet" href="../assets/css/atlantis.css">
+  <!-- CSS Just for demo purpose, don't include it in your project -->
+  <link rel="stylesheet" href="../assets/css/demo.css">
+  
+</head>
+
+<body class="mat-typography">
+  <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.3.1/jspdf.umd.min.js"></script>
+
+  <script>
+    document.onkeydown = function(e)
+    {
+      if(event.keyCode == 123){
+        return false;
+      }
+
+      if(e.ctrlKey && e.shiftKey && e.keyCode=='I'.charCodeAt(0))
+      {
+        return false;
+      }
+      if(e.ctrlKey && e.shiftKey && e.keyCode=='J'.charCodeAt(0))
+      {
+        return false;
+      }
+      if(e.ctrlKey && e.keyCode=='U'.charCodeAt(0))
+      {
+        return false;
+      }
+    }
+    document.addEventListener("keyup", function (e) {
+    var keyCode = e.keyCode ? e.keyCode : e.which;
+            if (keyCode == 44) {
+                stopPrntScr();
+            }
+        });
+function stopPrntScr() {
+
+            var inpFld = document.createElement("input");
+            inpFld.setAttribute("value", ".");
+            inpFld.setAttribute("width", "0");
+            inpFld.style.height = "0px";
+            inpFld.style.width = "0px";
+            inpFld.style.border = "0px";
+            document.body.appendChild(inpFld);
+            inpFld.select();
+            document.execCommand("copy");
+            inpFld.remove(inpFld);
+        }
+       function AccessClipboardData() {
+            try {
+                window.clipboardData.setData('text', "Access   Restricted");
+            } catch (err) {
+            }
+        }
+        setInterval("AccessClipboardData()", 300);
+  </script>
+  <app-root></app-root>
+  <!--   Core JS Files   -->
+  <script src="../assets/js/core/jquery.3.2.1.min.js"></script>
+  <script src="../assets/js/core/bootstrap.min.js"></script>
+  <!-- Atlantis JS -->
+  <script src="../assets/js/atlantis.js"></script>
+
+  
+</body>
+
+</html>

@@ -1,0 +1,66 @@
+<app-corporate-question-set [CurrentTestId]="CurrentTestId"></app-corporate-question-set>
+
+
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-header">
+                <div class="card-head-row">
+                    <div class="card-title" style="font: 100 18px 'Lato',sans-serif;color:black;display: none;">
+                        {{Question.CurrentSetName}}</div>
+                    <div class="card-tools" style="font: 100 18px 'Lato',sans-serif;color:black">
+                        <b>Question {{Question.CompletedQuestion}} of {{Question.TotalQuestion}}</b>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card-body">
+                <div *ngFor="let Q of Question.lstQuestionModel">
+                    <div *ngIf="Question.CurrentSetId === 9;then Set4_Content else Set5_content"></div>
+                    <ng-template #Set4_Content>
+                        <mat-label style="font: 100 24px 'Nunito';
+                        color: black;padding: 12px;">{{Q.Question}}</mat-label>
+                    </ng-template>
+                    <ng-template #Set5_content>
+                        <mat-label style="font: 100 20px 'Nunito';
+                                color: black;"> Rearrange following response</mat-label>
+                    </ng-template>
+
+                    <br />
+                    <br />
+
+                    <div cdkDropList class="example-list" (cdkDropListDropped)="drop($event,Q.lstQuestionRes)">
+
+                        <div class="example-box" *ngFor="let QuesRes of Q.lstQuestionRes"cdkDrag >
+                            
+                            <div class="example-custom-placeholder" *cdkDragPlaceholder></div>
+                            {{QuesRes.ResponseNumber}} - &nbsp;
+                            <i class="fa fa-arrow-up" style="font-size:24px;cursor: -webkit-grab;"> </i>
+                            <i class="fa fa-arrow-down" style="font-size:24px;cursor: -webkit-grab;"></i>
+                            &nbsp;
+                            {{QuesRes.ResponseText}}
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+
+            <div class="card-footer">
+                <button mat-button [hidden]="!Question.IsShowNextButton" (click)="NextAndSaveQuestion()" type="button"
+                    style="cursor: pointer;float: right" [disabled]="loading" class="mat-raised-button mat-primary"
+                    [class.spinner]="loading">
+                    Next Question
+                </button>
+                <button mat-button [hidden]="!Question.IsShowSubmitButton" (click)="saveQuestion()" type="submit"
+                    style="cursor: pointer;float: right" [disabled]="loading" class="mat-raised-button mat-primary"
+                    [class.spinner]="loading">
+                    Submit Set
+                </button>
+            </div>
+
+
+        </div>
+    </div>
+</div>

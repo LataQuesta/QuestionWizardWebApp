@@ -1,0 +1,82 @@
+.vertical-center {
+  margin: 0;
+  position: absolute;
+  top: 35%;
+  left: 35%;
+  -ms-transform: translateY(-50%);
+  transform: translateY(-50%);
+}
+
+@keyframes spinner {
+to {transform: rotate(360deg);}
+}
+ 
+.spinner:before {
+content: '';
+box-sizing: border-box;
+position: absolute;
+top: 50%;
+left: 50%;
+width: 20px;
+height: 20px;
+margin-top: -10px;
+margin-left: -10px;
+border-radius: 50%;
+border: 2px solid #ffffff;
+border-top-color: #000000;
+animation: spinner .8s linear infinite;
+}
+
+
+
+.bold-green-font {
+  font-weight: bold;
+  color: green;
+}
+
+.bold-font {
+  font-weight: bold;
+}
+
+.right-text {
+  text-align: right;
+}
+
+.large-font {
+  font-size: 15px;
+}
+
+.italic-darkblue-font {
+  font-style: italic;
+  color: darkblue;
+}
+
+.italic-purple-font {
+  font-style: italic;
+  color: purple;
+}
+
+.underline-blue-font {
+  text-decoration: underline;
+  color: blue;
+}
+
+.gold-border {
+  border: 3px solid gold;
+}
+
+.deeppink-border {
+  border: 3px solid deeppink;
+}
+
+.orange-background {
+  background-color: orange;
+}
+
+.orchid-background {
+  background-color: orchid;
+}
+
+.beige-background {
+  background-color: beige;
+}

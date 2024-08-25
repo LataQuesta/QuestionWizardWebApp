@@ -1,0 +1,130 @@
+
+<app-corporate-question-set [CurrentTestId]="CurrentTestId"></app-corporate-question-set>
+
+
+<div class="row">
+    <div class="col-md-12">
+      
+        <div class="card">
+            <div class="card-header" style="font: 100 18px 'Lato',sans-serif;color:black">
+                <div class="card-head-row">
+                    <div class="card-title" style="font: 100 18px 'Lato',sans-serif;color:black;display: none;">{{Question.CurrentSetName}}</div>
+                    <div class="card-tools">
+                        <b>Question {{Question.CompletedQuestion}} of {{Question.TotalQuestion}}</b>
+                    </div>
+                </div>
+            </div>
+            <div class="card-body">
+                <div id="form-wrapper">
+                    
+                    <form #QuestionForm='ngForm'>
+                        <div *ngFor="let Q of Question.lstQuestionModel;let j=index;">
+
+                           
+                            <span *ngIf="Q.ResponseTypeId == 3;then SliderDesign else Design1"></span>
+                            <ng-template #SliderDesign>
+                                
+                                <div class="panel pricing-table">
+                                    <div class="pricing-plan"
+                                        [ngClass]="Q.ResponseValue === this.RetrunQuestionResponseId(Q,0)? 'background-color-blue':''">
+                                        <ul class="pricing-features"
+                                            [ngClass]="Q.ResponseValue === this.RetrunQuestionResponseId(Q,0)? 'font-color':''">
+                                            <li class="pricing-features-item">Response A</li>
+                                        </ul>
+                                        {{RetrunQuestionResponseText(Q,0)}}
+                                    </div>
+                                    <div class="pricing-plan">
+                                        <ul class="pricing-features">
+                                            <li class="pricing-features-item" style="text-align: center;">Rating</li>
+                                        </ul>
+                                        <ngx-slider [(value)]="Q.Rating" [options]="options" (valueChange)="valueChange(Q)">
+                                        </ngx-slider>
+                                    </div>
+                                    <div class="pricing-plan"
+                                        [ngClass]="Q.ResponseValue === this.RetrunQuestionResponseId(Q,1)? 'background-color-blue':''">
+                                        <ul class="pricing-features"
+                                            [ngClass]="Q.ResponseValue === this.RetrunQuestionResponseId(Q,1)? 'font-color':''">
+                                            <li class="pricing-features-item">Response B</li>
+                                        </ul>
+                                        {{RetrunQuestionResponseText(Q,1)}}
+                                    </div>
+                                    <div class="pricing-plan" style="display: none;">
+                                        <div class="form-group" [class.has-error]="Q.QuesId.invalid && Q.QuesId.touched">
+                                            <input required [name]="Q.QuesId" #{{Q.QuesId}}="ngModel" [(ngModel)]="Q.ResponseValue"
+                                                type="text" [id]="Q.QuesId" [value]="Q.ResponseValue" />
+                                        </div>
+                                    </div>
+                                </div>
+                            </ng-template>
+
+                            <ng-template #Design1>
+                                
+                            <h5 class="card-title" appBlockCopyPaste> {{Q.Question}}</h5>
+                            <br/>
+                            <br/>
+                            <div *ngFor="let QuesRes of Q.lstQuestionRes">
+
+                                <label>
+                                    
+                                    <table>
+                                        <tr>
+                                            <td>
+                                                <input required type="radio" class="option-input radio"
+                                                    [name]="Q.QuesId" #{{Q.QuesId}}="ngModel"
+                                                    [(ngModel)]="Q.ResponseValue" [value]="QuesRes.ResponseId"
+                                                    [id]="QuesRes.ResponseId" />
+                                            </td>
+                                            <td>
+                                                {{QuesRes.ResponseText}}
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </label>
+                            </div>
+
+                            
+
+                            </ng-template>
+
+
+
+                        </div>
+                    </form>
+
+
+
+                </div>
+            </div>
+            <br />
+            <br />
+
+            <div class="card-footer">
+                <div *ngIf="QuestionForm.invalid;then FormValidation else loading_content"></div>
+                <ng-template #FormValidation>
+                    <button mat-button [hidden]="!Question.IsShowNextButton" (click)="NextAndSaveQuestion()"
+                        type="button" style="cursor: pointer;float: right" [disabled]="QuestionForm.invalid"
+                        class="mat-raised-button mat-primary" [class.spinner]="loading">
+                        Next Question
+                    </button>
+                    <button mat-button [hidden]="!Question.IsShowSubmitButton" (click)="saveQuestion()" type="submit"
+                        style="cursor: pointer;float: right" [disabled]="QuestionForm.invalid"
+                        class="mat-raised-button mat-primary" [class.spinner]="loading">
+                        Submit Set
+                    </button>
+                </ng-template>
+                <ng-template #loading_content>
+                    <button mat-button [hidden]="!Question.IsShowNextButton" (click)="NextAndSaveQuestion()"
+                        type="button" style="cursor: pointer;float: right" [disabled]="loading"
+                        class="mat-raised-button mat-primary" [class.spinner]="loading">
+                        Next Question
+                    </button>
+                    <button mat-button [hidden]="!Question.IsShowSubmitButton" (click)="saveQuestion()" type="submit"
+                        style="cursor: pointer;float: right" [disabled]="loading" class="mat-raised-button mat-primary"
+                        [class.spinner]="loading">
+                        Submit Set
+                    </button>
+                </ng-template>
+            </div>
+        </div>
+    </div>
+</div>

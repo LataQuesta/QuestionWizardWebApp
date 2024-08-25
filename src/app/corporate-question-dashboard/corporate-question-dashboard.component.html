@@ -1,0 +1,78 @@
+<div class="wrapper">
+    <div class="main-header">
+        <!-- Logo Header -->
+        <div class="logo-header" data-background-color="white">
+            <div class="logo">
+                <img src="../assets/img/EnneagramLog.png" alt="navbar brand" class="navbar-brand">
+                <!--<img src="../assets/img/logo.svg" alt="navbar brand" class="navbar-brand">-->
+            </div>
+        </div>
+        <!-- End Logo Header -->
+
+        <!-- Navbar Header -->
+        <nav class="navbar navbar-header navbar-expand-lg" data-background-color="white">
+            <div class="container-fluid">
+                <ul class="navbar-nav topbar-nav ml-md-auto align-items-center">
+                    <li class="nav-item dropdown hidden-caret">
+                        <a class="dropdown-toggle profile-pic" (click)="OpenSubmenu()"  data-toggle="dropdown" href="#" aria-expanded="false">
+                            <div class="avatar-sm">
+                                <img src="../assets/img/profile.png" alt="..." class="avatar-img rounded-circle">
+                            </div>
+                        </a>
+                        <ul #mySubMenu [ngClass]="this.IsSubmenuOpen === true? 'dropdown-menu dropdown-user animated fadeIn display':'dropdown-menu dropdown-user animated fadeIn'">
+                            <div class="dropdown-user-scroll scrollbar-outer">
+                                <li>
+                                    <div class="user-box">
+                                        <div class="avatar-lg"><img src="../assets/img/profile.png" alt="image profile"
+                                                class="avatar-img rounded"></div>
+                                        <div class="u-text">
+                                            <h4>{{Name | customPipe}}</h4>
+                                            <p class="text-muted">{{UserName}}</p>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="dropdown-divider"></div>
+                                    <a class="dropdown-item" (click)="openDialog()">Logout</a>
+                                </li>
+                            </div>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+        <!-- End Navbar -->
+    </div>
+
+
+
+    <div class="main-panel">
+        <div class="content">
+            <div class="panel-header bg-primary-gradient">
+                <div class="page-inner py-5">
+                    <div class="d-flex align-items-left align-items-md-center flex-column flex-md-row">
+                        <div>
+                            <h2 style="color: white;">Hi {{Name | customPipe}} your Assessment ID :- {{TestId}}</h2>
+                            <h5
+                                style="margin-bottom: .5rem!important;color: white;font-family: 'Lato', sans-serif;font-size: .9125rem;">
+                                Welcome to Questa Enneagram Personality Assessment</h5>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="page-inner mt--5">
+                <router-outlet></router-outlet> 
+            </div>
+        </div>
+        <!--<footer class="footer">
+            <div class="container-fluid">
+                <div class="copyright ml-auto">
+                    2018, made with <i class="fa fa-heart heart text-danger"></i> by <a
+                        href="https://www.themekita.com">ThemeKita</a>
+                </div>
+            </div>
+        </footer>-->
+    </div>
+
+</div>
+

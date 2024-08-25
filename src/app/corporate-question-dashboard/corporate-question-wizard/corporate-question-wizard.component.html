@@ -1,0 +1,47 @@
+
+<div *ngIf="this.IsQuestionDisplay">
+    <div *ngIf="Question.CurrentSetId === 1 
+                || Question.CurrentSetId === 4 
+                || Question.CurrentSetId === 5 
+                || Question.CurrentSetId === 15
+                || Question.CurrentSetId === 12|| Question.CurrentSetId === 13||Question.CurrentSetId === 14">
+        <div *ngIf="Question.IsDesktop;then DesktopTemplate else MobileTemplate "></div>
+        <ng-template #DesktopTemplate>
+            <app-corporate-question-template [Question]="Question"></app-corporate-question-template>
+        </ng-template>
+        <ng-template #MobileTemplate>
+            <app-corporate-question-template-mobile [Question]="Question"></app-corporate-question-template-mobile>
+        </ng-template>
+     
+    </div>
+    <div *ngIf="Question.CurrentSetId === 3">
+        <app-apptitude-question-template [Question]="Question"></app-apptitude-question-template>
+    </div>
+    <div *ngIf="Question.CurrentSetId === 6 || Question.CurrentSetId === 2">
+        <app-corporate-question-table-template [Question]="Question"></app-corporate-question-table-template>
+    </div>
+ 
+    <div *ngIf="Question.CurrentSetId === 7 || Question.CurrentSetId === 9">
+        <app-question-drag-and-drop-template [Question]="Question"></app-question-drag-and-drop-template>
+    </div>
+    <div *ngIf="Question.CurrentSetId === 8">
+        <app-personality-to-presence-question-template [Question]="Question"></app-personality-to-presence-question-template>
+    </div>
+    <div *ngIf="Question.CurrentSetId === 10 ">
+        <app-stressand-resilience-design-template [Question]="Question"></app-stressand-resilience-design-template>
+    </div>
+
+
+</div>
+<div *ngIf="this.IsTestComplete">
+    <app-corporate-complete-test [Question]="Question"></app-corporate-complete-test>
+</div>
+<div *ngIf="this.IsAssessmentError">
+    <app-corporate-assessment-error [Question]="Question"></app-corporate-assessment-error>
+</div>
+<div *ngIf="this.IsScordBoardDisplay">
+    <app-corporate-score [Question]="Question"></app-corporate-score>
+</div>
+
+
+

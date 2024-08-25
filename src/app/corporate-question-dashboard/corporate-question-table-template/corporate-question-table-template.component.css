@@ -1,0 +1,161 @@
+/* VARS */
+/* MIXINS */
+/* STYLE THE HTML ELEMENTS (INCLUDES RESETS FOR THE DEFAULT FIELDSET AND LEGEND STYLES) */
+
+fieldset {
+    margin: 0;
+    padding: 2rem;
+    box-sizing: border-box;
+    display: block;
+    border: none;
+    border: solid 1px #ccc;
+    min-width: 0;
+    background-color: #fff;
+}
+fieldset legend {
+    margin: 0 0 1.5rem;
+    padding: 0;
+    width: 100%;
+    float: left;
+    display: table;
+    
+    line-height: 140%;
+    
+    color: #333;
+}
+fieldset legend + * {
+    clear: both;
+}
+body:not(:-moz-handler-blocked) fieldset {
+    display: table-cell;
+}
+/* TOGGLE STYLING */
+.toggle {
+    margin: 0 0 1.5rem;
+    box-sizing: border-box;
+
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: flex-start;
+    align-items: stretch;
+}
+.toggle input {
+    width: 0;
+    height: 0;
+    position: absolute;
+    left: -9999px;
+}
+.toggle input + label {
+    width: 50%;
+    margin: 2px;
+    padding: 0.75rem 4rem;
+    box-sizing: border-box;
+    position: relative;
+    display: inline-block;
+    border: solid 1px black;
+    background-color: #fff;
+    line-height: 220%;
+    
+
+    font-family: Nunito;
+    font-size: 18px;
+    font-weight: 100;
+    
+    margin: 0 0 12px;
+	letter-spacing: 0.4px;
+
+
+    color: black;
+    text-align: center;
+    box-shadow: 0 0 0 rgba(255, 255, 255, 0);
+    transition: border-color 0.15s ease-out, color 0.25s ease-out, background-color 0.15s ease-out, box-shadow 0.15s ease-out;
+   /* ADD THESE PROPERTIES TO SWITCH FROM AUTO WIDTH TO FULL WIDTH */
+   /*flex: 0 0 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+   */
+   /* ----- */
+}
+.toggle input + label:first-of-type {
+    border-radius: 6px 0 0 6px;
+    border-right: solid 1px black;
+}
+.toggle input + label:last-of-type {
+    border-radius: 0 6px 6px 0;
+    border-left: solid 1px black;
+}
+.toggle input:hover + label {
+    border-color: #213140;
+}
+.toggle input:checked + label {
+    background-color: #fdd591;
+    color: black;
+    box-shadow: 0 0 10px rgba(102, 179, 251, .5);
+    border-color: #3f51b5;
+    z-index: 1;
+}
+.toggle input:focus + label {
+    outline: dotted 1px #ccc;
+    outline-offset: 0.45rem;
+}
+@media (max-width: 800px) {
+    .toggle input + label {
+        padding: 0.75rem 0.25rem;
+        flex: 0 0 50%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+   }
+}
+/* STYLING FOR THE STATUS HELPER TEXT FOR THE DEMO */
+.status {
+    margin: 0;
+}
+.status span {
+    
+    color: #b6985a;
+}
+.status span:first-of-type {
+    display: inline;
+}
+.status span:last-of-type {
+    display: none;
+}
+@media (max-width: 800px) {
+    .status span:first-of-type {
+        display: none;
+   }
+    .status span:last-of-type {
+        display: inline;
+   }
+}
+
+@keyframes spinner {
+   to {transform: rotate(360deg);}
+ }
+  
+ .spinner:before {
+   content: '';
+   box-sizing: border-box;
+   position: absolute;
+   top: 50%;
+   left: 50%;
+   width: 20px;
+   height: 20px;
+   margin-top: -10px;
+   margin-left: -10px;
+   border-radius: 50%;
+   border: 2px solid #ffffff;
+   border-top-color: #000000;
+   animation: spinner .8s linear infinite;
+ }
+
+
+
+
+td, th {
+    padding: 8px;
+}
+
+

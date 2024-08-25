@@ -1,0 +1,65 @@
+<div class="header">
+    <h1 mat-dialog-title>{{ data.title }}</h1>
+</div>
+<div mat-dialog-content>
+    <div *ngIf="data.IsInstrucation">
+        <p>Hi,</p>
+        <p>We are happy that you have chosen to walk down this path of rediscovering and transforming yourself with Questa Enneagram!</p>
+        <p>Our assessment on the Enneagram Types draws out the innate potential that each person has, based on what motivates them to think, feel and act in a certain way. There are nine Enneagram Types and based on your responses to the Questa Enneagram Assessment, we will be able to share your profile to enable you to take the journey of self-discovery forward.</p>
+        <p>Please go through the details below to understand the process as well as some key aspects to be kept in mind to make your assessment more accurate and beneficial. </p>
+       
+        <p><b>Key Guidelines:</b></p>
+    
+        <ul>
+            <li>
+                Please keep in mind, the assessment does not measure your competencies or skills. It helps you to understand how you developed those competencies and skills and how you can work with those strengths in a better way. The Enneagram has been researched over many years to understand human motivation, behaviours and patterns. We have drawn upon this research to create a formula-based assessment. The results of any Enneagram assessment are dependent on how well you know yourself and on how you respond to the statements.
+            </li>
+            <li>
+                Remember there are no correct or incorrect responses and no judgements, therefore please be as truthful to yourself as possible.
+            </li>
+            <li>
+                Keep in mind the context of your life in general – both your personal and professional aspects.
+            </li>
+            <li>
+                Take into account your life since childhood till date rather than focusing on what is true for you in the present, unless specifically asked.
+            </li>
+            <li>
+                Based on your Enneagram Type, a detailed profile will be created just for you! This profile will be confidential and will thus be shared only with you. If you chose to engage with us through a workshop or coaching sessions, only then your profile will be shared with the facilitator/coach, based on your consent.
+            </li>
+        </ul>
+    
+        <p><b>Important Instructions:</b></p>
+    
+        <ul>
+            <li>
+                You can take this assessment through a PC or Laptop which has uninterrupted internet connectivity. The assessment is compatible with browsers like Google Chrome, Safari and Mozilla Firefox.
+            </li>
+            <li>
+                On an average it takes 30 to 40 minutes to complete the assessment. Please ensure that you dedicate this time entirely without any disturbances or interruptions.
+            </li>
+            <li>
+                In case you get logged off during the assessment, please open the link shared on mail again and click on start test directly without providing the details again. Your previous responses will be saved and you will be able to start from where you left!
+            </li>
+            <li>
+                Please read the on-page module instructions carefully and respond accordingly. This is important as each module has a different set of guidelines.
+            </li>
+            <li>
+                Once you submit all the responses, your customized Questa Enneagram Self-discovery Profile will be sent on your registered email id instantly.
+            </li>
+        </ul>
+    
+    </div>
+    <div *ngIf="!data.IsInstrucation">
+        <p class="dialog-message">{{ data.message }}</p>
+    </div>
+</div>
+<div mat-dialog-actions>
+    <div *ngIf="data.IsInstrucation">
+        <button class="btn" (click)="confirm()">{{ data.confirmText }}</button>
+    </div>
+    <div *ngIf="!data.IsInstrucation">
+        <button class="btn btn-cancel" style="margin-right:10px;" (click)="cancel()">{{ data.cancelText }}</button>
+        <button class="btn" (click)="confirm()">{{ data.confirmText }}</button>
+    </div>
+    
+</div>

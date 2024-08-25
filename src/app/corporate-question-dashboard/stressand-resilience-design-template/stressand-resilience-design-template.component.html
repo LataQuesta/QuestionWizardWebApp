@@ -1,0 +1,148 @@
+<app-corporate-question-set [CurrentTestId]="CurrentTestId"></app-corporate-question-set>
+
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-header" style="font: 100 18px 'Lato',sans-serif;color:black">
+                <div class="card-head-row">
+                    <div class="card-title" style="font: 100 18px 'Lato',sans-serif;color:black;display: none;">
+                        {{Question.CurrentSetName}}</div>
+                    <div class="card-tools">
+                        <b>Question {{Question.CompletedQuestion}} of {{Question.TotalQuestion}}</b>
+                    </div>
+                </div>
+            </div>
+          
+            <div *ngFor="let Q of Question.lstQuestionModel;let j=index;">
+
+                <span *ngIf="Q.ResponseTypeId == 4;then CheckBoxDesign else RadioButtonDesign"></span>
+                <ng-template #CheckBoxDesign>
+                    <div class="card-body">
+                        <div id="form-wrapper">
+                            
+                            <h5 class="card-title" appBlockCopyPaste> {{Q.Question}}</h5>
+                            <br />
+
+                            <form [formGroup]="fg">
+                                <div *ngFor="let QuesRes of Q.lstQuestionRes; index as i">
+
+                                    <label formArrayName="QuestionResponse">
+                                        <table>
+                                            <tr>
+                                                <td>
+                                                    <input class="option-input checkbox" type="checkbox"
+                                                        [(ngModel)]="QuesRes.Checked" 
+                                                        [formControlName]="i"  value="{{QuesRes.ResponseId}}"
+                                                        [attr.disabled]="QuesRes.Disable ? true : null"
+                                                        (change)="ChangeQuestionRes(QuesRes.ResponseId,$event)" />
+                                                </td>
+                                                <td>
+                                                    {{this.Question.lstQuestionModel[0].lstQuestionRes[i].ResponseText}}
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </label>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                   
+                    <div class="card-footer">
+
+                        <div *ngIf="fg.invalid;then FormValidation else loading_content"></div>
+                        <ng-template #FormValidation>
+                            <button mat-button [hidden]="!Question.IsShowNextButton" (click)="NextAndSaveQuestion()"
+                                type="button" style="cursor: pointer;float: right" [disabled]="fg.invalid"
+                                class="mat-raised-button mat-primary" [class.spinner]="loading">
+                                Next Question
+                            </button>
+                            <button mat-button [hidden]="!Question.IsShowSubmitButton" (click)="saveQuestion()"
+                                type="submit" style="cursor: pointer;float: right" [disabled]="fg.invalid"
+                                class="mat-raised-button mat-primary" [class.spinner]="loading">
+                                Submit Set
+                            </button>
+                            <br />
+                        </ng-template>
+                        <ng-template #loading_content>
+                            <button mat-button [hidden]="!Question.IsShowNextButton" (click)="NextAndSaveQuestion()"
+                                type="button" style="cursor: pointer;float: right" [disabled]="loading"
+                                class="mat-raised-button mat-primary" [class.spinner]="loading">
+                                Next Question
+                            </button>
+                            <button mat-button [hidden]="!Question.IsShowSubmitButton" (click)="saveQuestion()"
+                                type="submit" style="cursor: pointer;float: right" [disabled]="loading"
+                                class="mat-raised-button mat-primary" [class.spinner]="loading">
+                                Submit Set
+                            </button>
+                            <br />
+                        </ng-template>
+
+                    </div>
+                </ng-template>
+                <ng-template #RadioButtonDesign>
+                    <div class="card-body">
+                        <div id="form-wrapper">
+                            <h5 class="card-title" appBlockCopyPaste> {{Q.Question}}</h5>
+                            <br />
+                            <form #QuestionForm='ngForm'>
+                                <div *ngFor="let QuesRes of Q.lstQuestionRes">
+                                    <label>
+                                        <table>
+                                            <tr>
+                                                <td>
+                                                    <input required type="radio" class="option-input radio"
+                                                        [name]="Q.QuesId" #{{Q.QuesId}}="ngModel"
+                                                        [(ngModel)]="Q.ResponseValue" [value]="QuesRes.ResponseId"
+                                                        [id]="QuesRes.ResponseId" />
+                                                </td>
+                                                <td>
+                                                    {{QuesRes.ResponseText}}
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </label>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                    <div class="card-footer">
+                        <div *ngIf="QuestionForm.invalid;then FormValidation else loading_content"></div>
+                        <ng-template #FormValidation>
+                            <button mat-button [hidden]="!Question.IsShowNextButton" (click)="NextAndSaveQuestion()"
+                                type="button" style="cursor: pointer;float: right" [disabled]="QuestionForm.invalid"
+                                class="mat-raised-button mat-primary" [class.spinner]="loading">
+                                Next Question
+                            </button>
+                            <button mat-button [hidden]="!Question.IsShowSubmitButton" (click)="saveQuestion()"
+                                type="submit" style="cursor: pointer;float: right" [disabled]="QuestionForm.invalid"
+                                class="mat-raised-button mat-primary" [class.spinner]="loading">
+                                Submit Set
+                            </button>
+                            <br />
+                        </ng-template>
+                        <ng-template #loading_content>
+                            <button mat-button [hidden]="!Question.IsShowNextButton" (click)="NextAndSaveQuestion()"
+                                type="button" style="cursor: pointer;float: right" [disabled]="loading"
+                                class="mat-raised-button mat-primary" [class.spinner]="loading">
+                                Next Question
+                            </button>
+                            <button mat-button [hidden]="!Question.IsShowSubmitButton" (click)="saveQuestion()"
+                                type="submit" style="cursor: pointer;float: right" [disabled]="loading"
+                                class="mat-raised-button mat-primary" [class.spinner]="loading">
+                                Submit Set
+                            </button>
+                            <br />
+                        </ng-template>
+                    </div>
+                </ng-template>
+            </div>
+
+
+
+
+
+
+        </div>
+    </div>
+</div>

@@ -1,0 +1,86 @@
+<app-corporate-question-set [CurrentTestId]="CurrentTestId"></app-corporate-question-set>
+
+
+
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="card">
+
+
+           
+
+              
+            <div class="card-header">
+                <div class="card-head-row">
+                    <div class="card-title" style="font: 100 18px 'Lato',sans-serif;color:black;display: none;">{{Question.CurrentSetName}}</div>
+                    <div class="card-tools" style="font: 100 18px 'Lato',sans-serif;color:black">
+                        <b>Question {{Question.CompletedQuestion}} of {{Question.TotalQuestion}}</b>
+                    </div>
+                </div>
+            </div>
+            <div class="card-body">
+                <div class="container">
+                    <div class="toggle">
+                        <input type="radio" name="Response" />
+                        <label for="Response1" style="background: #fee8c3;"><b>Response A</b></label>
+                        <input type="radio" name="Response" />
+                        <label for="Response2" style="background: #fee8c3;"><b>Response B</b></label>
+                    </div>
+                    <form #QuestionForm="ngForm" >
+                        
+                        <div class="toggle" *ngFor="let Q of Question.lstQuestionModel;let j=index;">
+                            
+                            <input required type="radio" 
+                                   [name]="Q.QuesId" #{{Q.QuesId}}="ngModel"
+                                   [(ngModel)]="Q.ResponseValue" 
+                                   [value]="this.RetrunQuestionResponseId(Q,0)" 
+                                   [id]="this.RetrunQuestionResponseId(Q,0)"  />
+                            <label [for]="this.RetrunQuestionResponseId(Q,0)" appBlockCopyPaste>
+                                {{RetrunQuestionResponseText(Q,0)}}
+                            </label>
+                            <input required type="radio" 
+                                   [name]="Q.QuesId" #{{Q.QuesId}}="ngModel"
+                                   [(ngModel)]="Q.ResponseValue" 
+                                   [value]="this.RetrunQuestionResponseId(Q,1)" 
+                                   [id]="this.RetrunQuestionResponseId(Q,1)"  />
+                            <label [for]="this.RetrunQuestionResponseId(Q,1)" appBlockCopyPaste>
+                                {{RetrunQuestionResponseText(Q,1)}}
+                            </label>
+                            
+                        </div>
+                        
+                       
+                    </form>
+                </div>
+            </div>
+            <div class="card-footer">
+                <div *ngIf="QuestionForm.invalid;then FormValidation else loading_content"></div>
+                <ng-template #FormValidation>
+                    <button mat-button [hidden]="!Question.IsShowNextButton" (click)="NextAndSaveQuestion()"
+                        type="button" style="cursor: pointer;float: right" [disabled]="QuestionForm.invalid"
+                        class="mat-raised-button mat-primary" [class.spinner]="loading">
+                        Next Question
+                    </button>
+                    <button mat-button [hidden]="!Question.IsShowSubmitButton" (click)="saveQuestion()" type="submit"
+                        style="cursor: pointer;float: right" [disabled]="QuestionForm.invalid"
+                        class="mat-raised-button mat-primary" [class.spinner]="loading">
+                        Submit Set
+                    </button>
+                </ng-template>
+                <ng-template #loading_content>
+                    <button mat-button [hidden]="!Question.IsShowNextButton" (click)="NextAndSaveQuestion()"
+                        type="button" style="cursor: pointer;float: right" [disabled]="loading"
+                        class="mat-raised-button mat-primary" [class.spinner]="loading">
+                        Next Question
+                    </button>
+                    <button mat-button [hidden]="!Question.IsShowSubmitButton" (click)="saveQuestion()" type="submit"
+                        style="cursor: pointer;float: right" [disabled]="loading" class="mat-raised-button mat-primary"
+                        [class.spinner]="loading">
+                        Submit Set
+                    </button>
+                </ng-template>
+            </div>
+        </div>
+    </div>
+</div>

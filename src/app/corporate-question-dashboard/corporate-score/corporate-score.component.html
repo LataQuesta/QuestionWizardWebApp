@@ -1,0 +1,61 @@
+<app-corporate-question-set [CurrentTestId]="CurrentTestId"></app-corporate-question-set>
+
+
+<div class="row">
+    <div class="col-md-12 center-block" style="height: 40px;">
+        <div class="card">
+            <div class="card-body">
+                <div *ngIf="Question.IsShowGoToNextSetButton;then DisplayNextButton else DisplayCompleteButton"></div>
+                <ng-template #DisplayNextButton>
+                    <button mat-button
+                        (click)="GoToNextSet(Question.CurrentUserId,Question.NextSetId,Question.TestId,Question.NextTypeId)"
+                        type="button" style="cursor: pointer;left: 40%;" [disabled]="loading"
+                        class="mat-raised-button mat-primary" [class.spinner]="loading">
+                        Go to Next Module
+                    </button>
+                </ng-template>
+                <ng-template #DisplayCompleteButton>
+                    <button mat-button (click)="CompleteTest(Question.CurrentUserId,Question.TestId)" type="button"
+                        style="cursor: pointer;left: 40%;" [disabled]="loading" class="mat-raised-button mat-primary"
+                        [class.spinner]="loading">
+                        Complete Assessment
+                    </button>
+                </ng-template>
+            </div>
+
+
+        </div>
+    </div>
+</div>
+
+<div id="barchart" style="visibility:hidden;border: 1px solid rgb(247, 230, 230)"></div>
+
+<div id="chart_div1"></div>
+
+<div *ngFor="let Score of this.Question.CompentencyScoreCard.MultiBarScoreCard; let i = index">
+    <br>
+    <div id="Multibarchart_{{i+1}}" style="visibility:hidden;border: 1px solid rgb(247, 230, 230)"> </div>
+
+    <div id="chart_div_{{i+1}}"></div>
+</div>
+
+
+<div class="row" style="display: none;">
+    <div class="col-md-3">
+
+    </div>
+    <div class="col-md-9">
+        <div class="card">
+            <div class="card-header">
+                <div class="card-title">ScoreCard - {{Question.CurrentSetName}}</div>
+            </div>
+            <div class="card-body">
+                <div id='png'></div>
+                <div *ngFor="let Score of this.Question.CompentencyScoreCard.MultiBarScoreCard; let i = index">
+                    <br>
+                    <div id="png_{{i+1}}"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

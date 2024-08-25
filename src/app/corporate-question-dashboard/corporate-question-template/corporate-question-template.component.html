@@ -1,0 +1,172 @@
+<app-corporate-question-set [CurrentTestId]="CurrentTestId"></app-corporate-question-set>
+
+
+<div class="row">
+    <div class="col-md-12">
+        <!--  <div class="card">
+            <div class="card-header">
+                <div class="card-head-row">
+                    <div class="card-title">{{Question.CurrentSetName}}</div>
+                    <div class="card-tools">
+                        <b>Question {{Question.CompletedQuestion}} of {{Question.TotalQuestion}}</b>
+                    </div>
+                </div>
+            </div>
+            <div class="card-body">
+
+                <form #QuestionForm='ngForm'>
+                    <div *ngFor="let Q of Question.lstQuestionModel;let j=index;">
+                        <div class="form-group" [class.has-error]="Q.QuesId.invalid && Q.QuesId.touched">
+                            <mat-label appBlockCopyPaste><b>Question : </b> {{Q.Question}}</mat-label>
+                            <mat-radio-group aria-labelledby="example-radio-group-label" class="example-radio-group"
+                                required [name]="Q.QuesId" #{{Q.QuesId}}="ngModel" [(ngModel)]="Q.ResponseValue">
+                                <mat-radio-button class="example-radio-button" *ngFor="let QuesRes of Q.lstQuestionRes"
+                                    [value]="QuesRes.ResponseId">
+                                    <span style="font-weight: 100;">{{QuesRes.ResponseText}}</span>
+                                </mat-radio-button>
+                            </mat-radio-group>
+                            <span class="help-block" *ngIf="Q.QuesId.invalid && Q.QuesId.touched">
+                                Please select Question
+                            </span>
+                        </div>
+                    </div>
+                    <div *ngIf="QuestionForm.invalid;then FormValidation else loading_content"></div>
+                    <ng-template #FormValidation>
+                        <button mat-button [hidden]="!Question.IsShowNextButton" (click)="NextAndSaveQuestion()"
+                            type="button" style="cursor: pointer;float: right;top: -25px;"
+                            [disabled]="QuestionForm.invalid" class="mat-raised-button mat-primary"
+                            [class.spinner]="loading">
+                            Next Set
+                        </button>
+                        <button mat-button [hidden]="!Question.IsShowSubmitButton" (click)="saveQuestion()"
+                            type="submit" style="cursor: pointer;float: right;top: -25px;"
+                            [disabled]="QuestionForm.invalid" class="mat-raised-button mat-primary"
+                            [class.spinner]="loading">
+                            Submit Set
+                        </button>
+                    </ng-template>
+                    <ng-template #loading_content>
+                        <button mat-button [hidden]="!Question.IsShowNextButton" (click)="NextAndSaveQuestion()"
+                            type="button" style="cursor: pointer;float: right;top: -25px;" [disabled]="loading"
+                            class="mat-raised-button mat-primary" [class.spinner]="loading">
+                            Next Set
+                        </button>
+                        <button mat-button [hidden]="!Question.IsShowSubmitButton" (click)="saveQuestion()"
+                            type="submit" style="cursor: pointer;float: right;top: -25px;" [disabled]="loading"
+                            class="mat-raised-button mat-primary" [class.spinner]="loading">
+                            Submit Set
+                        </button>
+                    </ng-template>
+                </form>
+            </div>
+        </div>-->
+
+        <div class="card">
+            <div class="card-header" style="font: 100 18px 'Lato',sans-serif;color:black">
+                <div class="card-head-row">
+                    <div class="card-title" style="font: 100 18px 'Lato',sans-serif;color:black;display: none;">{{Question.CurrentSetName}}</div>
+                    <div class="card-tools">
+                        <b>Question {{Question.CompletedQuestion}} of {{Question.TotalQuestion}}</b>
+                    </div>
+                </div>
+            </div>
+            <div class="card-body">
+                <div id="form-wrapper">
+                    <form #QuestionForm='ngForm'>
+                        <div *ngFor="let Q of Question.lstQuestionModel;let j=index;">
+
+                            <h5 class="card-title" appBlockCopyPaste> {{Q.Question}}</h5>
+                            <br />
+                            <br />
+
+                            <span *ngIf="Q.ResponseTypeId == 2;then Design2 else Design1"></span>
+                            <ng-template #Design2>
+                                <div class="radiobtn" *ngFor="let QuesRes of Q.lstQuestionRes">
+
+                                    <input required type="radio" [name]="Q.QuesId" #{{Q.QuesId}}="ngModel"
+                                        [(ngModel)]="Q.ResponseValue" [value]="QuesRes.ResponseId"
+                                        [id]="QuesRes.ResponseId" />
+                                    <label [for]="QuesRes.ResponseId" appBlockCopyPaste>
+                                        {{QuesRes.ResponseText}}
+                                    </label>
+                                </div>
+                            </ng-template>
+
+                            <ng-template #Design1>
+                                <div id="debt-amount-slider">
+
+                                    <input required type="radio" [name]="Q.QuesId" #{{Q.QuesId}}="ngModel"
+                                        [(ngModel)]="Q.ResponseValue" [value]="this.RetrunQuestionResponseId(Q,4)"
+                                        [id]="this.RetrunQuestionResponseId(Q,4)" />
+                                    <label [for]="this.RetrunQuestionResponseId(Q,4)" data-debt-amount="Never True">
+                                    </label>
+                                    <input required type="radio" [name]="Q.QuesId" #{{Q.QuesId}}="ngModel"
+                                        [(ngModel)]="Q.ResponseValue" [value]="this.RetrunQuestionResponseId(Q,3)"
+                                        [id]="this.RetrunQuestionResponseId(Q,3)" />
+                                    <label [for]="this.RetrunQuestionResponseId(Q,3)"
+                                        data-debt-amount="Usually Not True">
+                                    </label>
+                                    <input required type="radio" [name]="Q.QuesId" #{{Q.QuesId}}="ngModel"
+                                        [(ngModel)]="Q.ResponseValue" [value]="this.RetrunQuestionResponseId(Q,2)"
+                                        [id]="this.RetrunQuestionResponseId(Q,2)" />
+                                    <label [for]="this.RetrunQuestionResponseId(Q,2)" data-debt-amount="Sometimes True">
+                                    </label>
+                                    <input required type="radio" [name]="Q.QuesId" #{{Q.QuesId}}="ngModel"
+                                        [(ngModel)]="Q.ResponseValue" [value]="this.RetrunQuestionResponseId(Q,1)"
+                                        [id]="this.RetrunQuestionResponseId(Q,1)" />
+                                    <label [for]="this.RetrunQuestionResponseId(Q,1)" data-debt-amount="Usually True">
+                                    </label>
+
+                                    <input required type="radio" [name]="Q.QuesId" #{{Q.QuesId}}="ngModel"
+                                        [(ngModel)]="Q.ResponseValue" [value]="this.RetrunQuestionResponseId(Q,0)"
+                                        [id]="this.RetrunQuestionResponseId(Q,0)" />
+                                    <label [for]="this.RetrunQuestionResponseId(Q,0)" data-debt-amount="Always True ">
+                                    </label>
+
+
+
+                                    <div id="debt-amount-pos"></div>
+                                </div>
+
+                            </ng-template>
+
+
+
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <br />
+            <br />
+            <br />
+            <br />
+            <div class="card-footer">
+                <div *ngIf="QuestionForm.invalid;then FormValidation else loading_content"></div>
+                <ng-template #FormValidation>
+                    <button mat-button [hidden]="!Question.IsShowNextButton" (click)="NextAndSaveQuestion()"
+                        type="button" style="cursor: pointer;float: right" [disabled]="QuestionForm.invalid"
+                        class="mat-raised-button mat-primary" [class.spinner]="loading">
+                        Next Question
+                    </button>
+                    <button mat-button [hidden]="!Question.IsShowSubmitButton" (click)="saveQuestion()" type="submit"
+                        style="cursor: pointer;float: right" [disabled]="QuestionForm.invalid"
+                        class="mat-raised-button mat-primary" [class.spinner]="loading">
+                        Submit Set
+                    </button>
+                </ng-template>
+                <ng-template #loading_content>
+                    <button mat-button [hidden]="!Question.IsShowNextButton" (click)="NextAndSaveQuestion()"
+                        type="button" style="cursor: pointer;float: right" [disabled]="loading"
+                        class="mat-raised-button mat-primary" [class.spinner]="loading">
+                        Next Question
+                    </button>
+                    <button mat-button [hidden]="!Question.IsShowSubmitButton" (click)="saveQuestion()" type="submit"
+                        style="cursor: pointer;float: right" [disabled]="loading" class="mat-raised-button mat-primary"
+                        [class.spinner]="loading">
+                        Submit Set
+                    </button>
+                </ng-template>
+            </div>
+        </div>
+    </div>
+</div>

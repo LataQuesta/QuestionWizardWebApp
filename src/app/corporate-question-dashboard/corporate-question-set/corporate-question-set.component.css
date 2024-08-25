@@ -1,0 +1,55 @@
+.progress-bar.progress-bar-success {
+    background: #65b12d;
+}
+.text-success {
+    color: #65b12d!important;
+}
+.progress-bar.progress-bar-info {
+    background: #006DF0;
+}
+.text-info {
+    color: #006DF0!important;
+}
+.progress-bar.progress-bar-danger {
+    background:#738276 ;
+}
+.text-danger {
+    color: #738276!important;
+}
+.QuestionAttemp{
+    padding: 1.25rem;
+    font-size: 17px;
+    text-align: center;
+    font-weight: bold;
+    word-break: break-word;
+}
+.btn-circle {
+    width: 30px;
+    height: 30px;
+    padding: 6px 0px;
+    border-radius: 15px;
+    text-align: center;
+    font-size: 12px;
+    line-height: 1.42857;
+    margin: 8px;
+  }
+
+p{
+    font: 100 18px 'Lato',sans-serif;
+    color: black;
+}
+
+.card{
+    font: 100 18px 'Lato',sans-serif;
+    color: black;
+}
+
+td{
+    font: 100 18px 'Lato',sans-serif;
+    color: black;
+} 
+
+.QuestionAttemp{
+    font: 100 18px 'Lato',sans-serif;
+    color: black;
+}

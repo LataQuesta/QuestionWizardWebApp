@@ -1,0 +1,404 @@
+<!--
+<h2>$<span [countUp]="5000" [options]="opts" class="counter"></span> <span class="tuition-fees">Tuition Fees</span></h2>
+-->
+
+<div class="row mt--2">
+    <!--
+    <div class="col-md-2"  *ngFor="let i of LoadExamStatusCode;let j=index;">
+        <div class="card full-height" [ngSwitch]="i.StatusCode">
+            <div class="card-body" *ngSwitchCase="'P'">
+                <div class="card-title">{{i.PartialSetName}}</div>
+                <div class="card-category">
+                    <circle-progress [percent]=i.CompletePercentage [radius]="50" [outerStrokeWidth]="5"
+                        [innerStrokeWidth]="2" [outerStrokeColor]="'#1E35B2'" subtitle="In progress"
+                        [innerStrokeColor]="'#9FACF3'" [animation]="true" [animationDuration]="300">
+                    </circle-progress>
+                </div>
+
+            </div>
+            <div class="card-body" *ngSwitchCase="'C'">
+                <div class="card-title">{{i.PartialSetName}}</div>
+                <div class="card-category">
+                    <circle-progress [percent]=i.CompletePercentage [radius]="50" [outerStrokeWidth]="5"
+                        [innerStrokeWidth]="2" [outerStrokeColor]="'#78C000'" subtitle="Completed"
+                        [innerStrokeColor]="'#C7E596'" [animation]="true" [animationDuration]="300">
+                    </circle-progress>
+                </div>
+
+            </div>
+            <div class="card-body" *ngSwitchCase="'NS'">
+                <div class="card-title">{{i.PartialSetName}}</div>
+                <div class="card-category">
+                    <circle-progress [percent]=i.CompletePercentage [radius]="50" [outerStrokeWidth]="5"
+                        [innerStrokeWidth]="2" [outerStrokeColor]="'#85929E'" subtitle="Not started"
+                        [innerStrokeColor]="'#D5D8DC'" [animation]="true" [animationDuration]="300">
+                    </circle-progress>
+                </div>
+
+            </div>
+            <div class="card-body" *ngSwitchCase="'E'">
+                <div class="card-title">{{i.PartialSetName}}</div>
+                <div class="card-category">
+                    <circle-progress [percent]=i.CompletePercentage [radius]="50" [outerStrokeWidth]="5"
+                        [innerStrokeWidth]="2" [outerStrokeColor]="'#85929E'" subtitle="Not started"
+                        [innerStrokeColor]="'#D5D8DC'" [animation]="true" [animationDuration]="300">
+                    </circle-progress>
+                </div>
+
+            </div>
+        </div>
+    </div>
+-->
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-body">
+                <span class="QuestionAttemp">
+                    You have attempted {{this.CompletedQuestion}} out of {{this.TotalQuestion}}
+                </span>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<div class="row" style="display: none;">
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-body">
+
+                <div *ngIf="this.NoOfQuestionComplete === 100;then Completecontent else Progresscontent"></div>
+                <ng-template #Progresscontent>
+                    <div class="progress">
+                        <div class="progress-bar bg-info" role="progressbar" [style.width.%]="this.NoOfQuestionComplete"
+                            aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">
+                            {{NoOfQuestionComplete}}%
+                        </div>
+                    </div>
+                </ng-template>
+                <ng-template #Completecontent>
+                    <div class="progress">
+                        <div class="progress-bar bg-success" role="progressbar"
+                            [style.width.%]="this.NoOfQuestionComplete" aria-valuenow="25" aria-valuemin="0"
+                            aria-valuemax="100">
+                            {{NoOfQuestionComplete}}%
+                        </div>
+                    </div>
+                </ng-template>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div *ngIf="ProgressSetId === 1">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-body">
+                    <!-- <p><u>Module 1 </u></p>-->
+
+                    <p>
+                        Please choose one of the five options given with each statement, depending on how often you
+                        think, feel or
+                        act that way.<b> While responding, look at your life as a whole (since childhood till date)
+                            rather than
+                            the present situation.</b>
+                    </p>
+
+                    <table>
+                        <tr>
+                            <td> <img src="../assets/img/Time.jpg" style="width: 40px;height: 40px;"></td>
+                            <td>Estimated Time: 10-15 Minutes</td>
+                        </tr>
+                        <tr>
+                            <td> <img src="../assets/img/Document.jpg" style="width: 40px;height: 40px;"></td>
+                            <td>Number of questions: 45 </td>
+                        </tr>
+                        <tr>
+                            <td> <img src="../assets/img/Clock.jpg" style="width: 40px;height: 40px;"></td>
+                            <td>Go at your own pace</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+</div>
+
+<div *ngIf="ProgressSetId === 2 ">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-body">
+                    <!-- <p><u>Module 2 </u></p>-->
+
+                   <p> From the given paired statements please choose the option that you relate to the most.
+                    <b>Keep the focus on your life as a whole (since childhood till date) rather than the present
+                        situation.</b>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+<div *ngIf="ProgressSetId === 6">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-body">
+                    <!-- <p><u>Module 2 </u></p>-->
+
+                   <p> From the given paired statements please choose the option that you relate to the most. 
+                    <b>Keep the focus on your life since childhood till date rather than the present situation.</b>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+<div *ngIf="ProgressSetId === 4 ">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-body">
+                    <!-- <p><u>Module 3 </u></p>-->
+                <p> For the following questions, please select the option you relate with most and choose your response accordingly.
+                </p>
+                    <table>
+                        <tr>
+                            <td> <img src="../assets/img/Time.jpg" style="width: 40px;height: 40px;"></td>
+                            <td>Estimated Time: 10-15 Minutes</td>
+                        </tr>
+                        <tr>
+                            <td> <img src="../assets/img/Document.jpg" style="width: 40px;height: 40px;"></td>
+                            <td>Number of questions: 37 </td>
+                        </tr>
+                        <tr>
+                            <td> <img src="../assets/img/Clock.jpg" style="width: 40px;height: 40px;"></td>
+                            <td>Go at your own pace</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<div *ngIf="ProgressSetId === 3">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-body">
+                   <!-- <p><u>Module 4 </u></p>-->
+                   
+                    <ul>
+                        <li>
+                            This section comprises of 3 sub-sections: Verbal/English, Numerical and Logical Reasoning, having 10 questions each. 
+                        </li>
+                        <li>
+                            You will have 30 minutes to answer all 30 questions. Please take the assessment quickly and accurately to perform well.
+                        </li>
+                        <li>
+                            If you don't know the answer to a question, leave it and get back to it if you have time. You may click the Back and Next button during the test to review or skip questions.
+                        </li>
+                        <li>
+                            It is recommended you keep a pen and rough paper (calculator, if allowed) for calculations. 
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<div *ngIf="ProgressSetId === 5">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-body">
+                    <!-- <p><u>Module 1 </u></p>-->
+
+                    <p>
+                        For this section, please choose one of the five options given with each statement, depending on how often you think, feel or act that way. 
+                        <b> It's important to keep in mind the context of your life in general and not just your work environment. Also, while responding, look back at your life since childhood till date rather than the present situation.</b>
+                    </p>
+
+                    <table>
+                        <tr>
+                            <td> <img src="../assets/img/Time.jpg" style="width: 40px;height: 40px;"></td>
+                            <td>Estimated Time: 20-25 Minutes</td>
+                        </tr>
+                        <tr>
+                            <td> <img src="../assets/img/Clock.jpg" style="width: 40px;height: 40px;"></td>
+                            <td>Go at your own pace</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div *ngIf="ProgressSetId === 7">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-body">
+                     <!-- <p><u>Module 3 </u></p>-->
+                    <p>
+                        Please drag the arrow and arrange the 3 given options in the order of preference from most 
+                        applicable to you to least applicable to you. 
+                        While responding to this section <b> keep in mind the context of your life in general 
+                        and not just your work environment; and look at your life since childhood till date 
+                        rather than the present situation.</b>
+                    </p>
+
+                    <table>
+                        <tr>
+                            <td> <img src="../assets/img/Time.jpg" style="width: 40px;height: 40px;"></td>
+                            <td>Estimated Time: 5 Minutes</td>
+                        </tr>
+                        <tr>
+                            <td> <img src="../assets/img/Clock.jpg" style="width: 40px;height: 40px;"></td>
+                            <td>Go at your own pace</td>
+                        </tr>
+                    </table>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+
+
+<div *ngIf="ProgressSetId === 8">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-body">
+                   <!-- <p><u>Module 4 </u></p>-->
+                    <p>
+                        In this module, there are two types of questions – one where you need to choose one of the five options given with each statement depending on how much you relate to them and the second where two statements are given, and you need to drag the button towards the statement you relate to depending on how much you relate to it. Note that 4 is most relatable and 1 is least relatable
+                    </p>
+
+                    <table>
+                        <tr>
+                            <td> <img src="../assets/img/Time.jpg" style="width: 40px;height: 40px;"></td>
+                            <td>Estimated Time: 5 - 7 Minutes</td>
+                        </tr>
+                        <tr>
+                            <td> <img src="../assets/img/Clock.jpg" style="width: 40px;height: 40px;"></td>
+                            <td>Go at your own pace</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+
+<div *ngIf="ProgressSetId === 9">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-body">
+                    <!-- <p><u>Module 5 </u></p>-->
+                    <p>
+                        Please drag the arrow and arrange the three given options in the order of preference from 
+                        most applicable to you to least applicable to you. 
+                        While responding to this section <b> keep in mind the context of your life in general and 
+                        not just your work environment; 
+                        and look at your life since childhood till date rather than the present situation.</b>
+                    </p>
+
+                    <table>
+                        <tr>
+                            <td> <img src="../assets/img/Time.jpg" style="width: 40px;height: 40px;"></td>
+                            <td>Estimated Time: 5 - 7 Minutes</td>
+                        </tr>
+                        <tr>
+                            <td> <img src="../assets/img/Clock.jpg" style="width: 40px;height: 40px;"></td>
+                            <td>Go at your own pace</td>
+                        </tr>
+                    </table>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+
+<div *ngIf="ProgressSetId === 10">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-body">
+                    <!-- <p><u>Module 6 </u></p>-->
+                    <p>
+                        Choose one of the five options given with each statement depending on how much you relate to them.
+
+                        <br />
+                        This section focuses more on your <b>current life situation and experiences (last 3 to 6 months)</b>, 
+                        so while responding please keep that in mind.
+                    </p>
+                    <table>
+                        <tr>
+                            <td> <img src="../assets/img/Time.jpg" style="width: 40px;height: 40px;"></td>
+                            <td>Estimated Time: 5 Minutes</td>
+                        </tr>
+                        <tr>
+                            <td> <img src="../assets/img/Clock.jpg" style="width: 40px;height: 40px;"></td>
+                            <td>Go at your own pace</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+
+<div *ngIf="ProgressSetId === 15 || ProgressSetId === 12 ||ProgressSetId === 14">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-body">
+                    <!-- <p><u>Module 7 </u></p>-->
+                <p> 
+                    For this section, please choose the option that you relate to the most. 
+                    This section focuses more on your more <b> recent life situations and experiences (last 2 to 4 years)</b>, 
+                    so while responding please keep that in mind.
+                </p>
+                <table>
+                    <tr>
+                        <td> <img src="../assets/img/Time.jpg" style="width: 40px;height: 40px;"></td>
+                        <td>Estimated Time: 15-20 Minutes</td>
+                    </tr>
+                    <tr>
+                        <td> <img src="../assets/img/Clock.jpg" style="width: 40px;height: 40px;"></td>
+                        <td>Go at your own pace</td>
+                    </tr>
+                </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
